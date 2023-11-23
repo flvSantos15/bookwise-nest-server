@@ -1,5 +1,4 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
-// import crypto from 'crypto';
 
 @Entity()
 export class User {
@@ -10,20 +9,24 @@ export class User {
   name: string;
 
   @Column()
+  password: string;
+
+  @Column({ nullable: true })
   avatar: string;
 
   @Column({ nullable: true, type: 'datetime' })
   created_at: Date | null;
 
-  @Column()
-  pagesRead: number;
+  @Column({ nullable: true, type: 'datetime' })
+  updated_at: Date | null;
 
-  @Column()
-  reviewedBooks: number;
-
-  @Column()
-  authorsRead: number;
-
-  @Column()
-  mostReadCategory: number;
+  constructor(props: {
+    name: string;
+    password: string;
+    avatar: string | null;
+    created_at?: Date | null;
+    updated_at?: Date | null;
+  }) {
+    Object.assign(this, props);
+  }
 }
